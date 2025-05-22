@@ -1,6 +1,6 @@
 import React from "react";
 
-const Bar = ({ slides, currentIndex, progress }) => {
+const ProgressBar = ({ slides, currentIndex, progress }) => {
   return (
     <div className="flex gap-1 mb-2">
       {slides.map((slide, index) => {
@@ -31,4 +31,4 @@ const Bar = ({ slides, currentIndex, progress }) => {
   );
 };
 
-export default Bar;
+export default ProgressBar;
