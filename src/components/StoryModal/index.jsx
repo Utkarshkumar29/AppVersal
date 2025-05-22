@@ -7,28 +7,28 @@ import PauseIcon from "../../assets/icons/PauseIcon";
 import CloseIcon from "../../assets/icons/CloseIcon";
 
 const StoryModal = ({ story, onClose }) => {
-    const [currentIndex, setCurrentIndex] = useState(0)
-    console.log("StoryModal", story.slides[currentIndex]);
-  const [play, setPlay] = useState(true)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  console.log("StoryModal", story.slides[currentIndex]);
+  const [play, setPlay] = useState(true);
   const [progress, setProgress] = useState(0);
 
   const nextSlide = () => {
     if (currentIndex < story.slides.length - 1) {
-      setCurrentIndex((prev) => prev + 1)
-      setProgress(0)
+      setCurrentIndex((prev) => prev + 1);
+      setProgress(0);
     } else {
-      onClose()
+      onClose();
     }
-  }
+  };
 
   const prevSlide = () => {
     if (currentIndex > 0) {
-      setCurrentIndex((prev) => prev - 1)
-      setProgress(0)
+      setCurrentIndex((prev) => prev - 1);
+      setProgress(0);
     }
-  }
+  };
 
-   useEffect(() => {
+  useEffect(() => {
     if (!play) return;
 
     const interval = setInterval(() => {
@@ -51,45 +51,56 @@ const StoryModal = ({ story, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center px-4">
-  <div className="relative w-full max-w-md h-[70vh] flex flex-col justify-between">
-      <Bar slides={story.slides} currentIndex={currentIndex} progress={progress} />
+      <div className="relative w-full max-w-md h-[70vh] flex flex-col justify-between">
+        <Bar
+          slides={story.slides}
+          currentIndex={currentIndex}
+          progress={progress}
+        />
         <Slide slide={story.slides[currentIndex]} />
 
         <button
-          onClick={()=>prevSlide()}
+          onClick={() => prevSlide()}
           className="rotate-180 absolute left-2 top-1/2 transform -translate-y-1/2 text-white text-2xl bg-black bg-opacity-50 rounded-full flex items-center justify-center p-2 pr-[5px] "
         >
           <ArrowIcon />
         </button>
         <button
-          onClick={()=>nextSlide()}
+          onClick={() => nextSlide()}
           className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white text-2xl bg-black bg-opacity-50 rounded-full flex items-center justify-center p-2 pr-[5px]"
         >
           <ArrowIcon />
         </button>
         <button
-          onClick={()=>{setPlay(!play)}}
-          className={`absolute top-4 right-4 text-white text-lg font-bold p-2 bg-black bg-opacity-50 rounded-full flex items-center justify-center ${play && "p-2.5"}  `}
+          onClick={() => {
+            setPlay(!play);
+          }}
+          className={`absolute top-6 right-2 text-white text-lg font-bold p-2 bg-black bg-opacity-50 rounded-full flex items-center justify-center ${
+            !play && "p-2.5"
+          }  `}
         >
-          {!play ? <PlayIcon/>:<PauseIcon/>}
+          {!play ? <PlayIcon /> : <PauseIcon />}
         </button>
         {story?.slides[currentIndex]?.button_text && (
-        <a
-          href={story?.slides[currentIndex]?.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className=" absolute -bottom-12 left-[40%]  text-white text-[16px] leading-[24px] rounded-md mt-2 px-[12px] py-[8px] bg-gray-800 hover:bg-gray-700 transition duration-200"
-        >
-          {story?.slides[currentIndex]?.button_text}
-        </a>
-      )}
+          <a
+            href={story?.slides[currentIndex]?.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute -bottom-12 left-1/2 transform -translate-x-1/2 text-white text-[16px] leading-[24px] rounded-md mt-2 px-[12px] py-[8px] bg-gray-800 hover:bg-gray-700 transition duration-200"
+          >
+            {story?.slides[currentIndex]?.button_text}
+          </a>
+        )}
       </div>
-      
-      <div className=" absolute top-4 right-4 text-white text-lg font-bold p-2 bg-black bg-opacity-50 rounded-full flex items-center justify-center cursor-pointer" onClick={()=>onClose()}>
-        <CloseIcon/>
+
+      <div
+        className=" absolute top-4 right-4 text-white text-lg font-bold p-2 bg-black bg-opacity-50 rounded-full flex items-center justify-center cursor-pointer"
+        onClick={() => onClose()}
+      >
+        <CloseIcon />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default StoryModal
+export default StoryModal;
