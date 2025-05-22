@@ -6,7 +6,7 @@ import PlayIcon from "../../assets/icons/PlayIcon";
 import PauseIcon from "../../assets/icons/PauseIcon";
 import CloseIcon from "../../assets/icons/CloseIcon";
 
-const StoryModal = ({ story, onClose }) => {
+const   StoryModal = ({ story, onClose }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
     console.log("StoryModal", story.slides[currentIndex]);
   const [play, setPlay] = useState(true)
@@ -51,7 +51,8 @@ const StoryModal = ({ story, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex flex-col items-center justify-center  ">
-      <div className="relative w-full max-w-md mx-auto ">
+      <div className="relative w-full max-w-md mx-auto min-h-screen h-auto px-4 py-6">
+
       <Bar slides={story.slides} currentIndex={currentIndex} progress={progress} />
         <Slide slide={story.slides[currentIndex]} />
 
