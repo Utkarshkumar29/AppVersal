@@ -6,7 +6,7 @@ import PlayIcon from "../../assets/icons/PlayIcon";
 import PauseIcon from "../../assets/icons/PauseIcon";
 import CloseIcon from "../../assets/icons/CloseIcon";
 
-const   StoryModal = ({ story, onClose }) => {
+const StoryModal = ({ story, onClose }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
     console.log("StoryModal", story.slides[currentIndex]);
   const [play, setPlay] = useState(true)
@@ -50,9 +50,8 @@ const   StoryModal = ({ story, onClose }) => {
   }, [play, currentIndex, story.slides.length, onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex flex-col items-center justify-center  ">
-      <div className="relative w-full max-w-md mx-auto min-h-screen h-auto px-4 py-6">
-
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-90 flex items-center justify-center px-4">
+  <div className="relative w-full max-w-md h-[70vh] flex flex-col justify-between">
       <Bar slides={story.slides} currentIndex={currentIndex} progress={progress} />
         <Slide slide={story.slides[currentIndex]} />
 
@@ -74,17 +73,18 @@ const   StoryModal = ({ story, onClose }) => {
         >
           {!play ? <PlayIcon/>:<PauseIcon/>}
         </button>
-      </div>
-      {story?.slides[currentIndex]?.button_text && (
+        {story?.slides[currentIndex]?.button_text && (
         <a
           href={story?.slides[currentIndex]?.link}
           target="_blank"
           rel="noopener noreferrer"
-          className=" text-white text-[16px] leading-[24px] rounded-md mt-2 px-[12px] py-[8px] bg-gray-800 hover:bg-gray-700 transition duration-200"
+          className=" absolute -bottom-12 left-[40%]  text-white text-[16px] leading-[24px] rounded-md mt-2 px-[12px] py-[8px] bg-gray-800 hover:bg-gray-700 transition duration-200"
         >
           {story?.slides[currentIndex]?.button_text}
         </a>
       )}
+      </div>
+      
       <div className=" absolute top-4 right-4 text-white text-lg font-bold p-2 bg-black bg-opacity-50 rounded-full flex items-center justify-center cursor-pointer" onClick={()=>onClose()}>
         <CloseIcon/>
       </div>
